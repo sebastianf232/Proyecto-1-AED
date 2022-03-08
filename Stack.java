@@ -1,5 +1,4 @@
 import java.util.Vector;
-
 /**
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructuras de Datos

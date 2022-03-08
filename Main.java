@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 /**
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructuras de Datos
@@ -9,11 +9,10 @@
  * Clase Main
  */
 
-public class Main{
-    static converter conv = new converter();
-=======
+
+
 import java.util.*;
->>>>>>> Stashed changes
+
 
 public class Main{
     static tokenFinder conv = new tokenFinder();

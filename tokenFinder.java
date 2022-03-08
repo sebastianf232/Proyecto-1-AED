@@ -31,19 +31,12 @@ public class tokenFinder {
         } return -1;
     }
 
-<<<<<<< Updated upstream
+
     /**
      * @param str
      * @return chars
      */
-    public List<Character> separate(String str){ ///Metodo que separa cada caracter en el ArrayList
-        List<Character> chars = new ArrayList<>();
-  
-        for (char ch : str.toCharArray()) { 
-  
-            chars.add(ch);
-=======
-    public ArrayList<String> separate(String str){
+    public ArrayList<String> separate(String str){  ///Metodo que separa cada caracter en el ArrayList
         ArrayList<String> chars = new ArrayList<>();
         ArrayList<Character> espacios = new ArrayList<>();
         
@@ -51,24 +44,20 @@ public class tokenFinder {
         
         for (int i = 0; i<temp.length; i++){
             chars.add(temp[i]);
->>>>>>> Stashed changes
         }
   
         return chars;
     }
 
     
-<<<<<<< Updated upstream
+
     /**
      * @param l
      * @return listaLisp
      */
-    public List<Character> listaLisp(ArrayList l){ ///Metodo que permite aniade los  caracteres en el ArrayList
-        ArrayList<Character> listaIn = new ArrayList<>();
-=======
-    public ArrayList<ArrayList<String>> listaLisp(ArrayList l){
+    public ArrayList<ArrayList<String>> listaLisp(ArrayList l){ ///Metodo que permite aniade los  caracteres en el ArrayList
         ArrayList<String> listaIn = new ArrayList<>();
->>>>>>> Stashed changes
+
         listaIn = l;
         ArrayList<ArrayList<String>> listaFinal = new ArrayList<>();
         Stack<String> stack = new Stack<>();

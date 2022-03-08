@@ -6,7 +6,7 @@ import java.util.Vector;
  * Hoja de Trabajo 4
  * @author Juan Miguel Gonzalez-Campo 21077
  * @author Sebastian Franco 21484
- * @author Dimitrio Badani 20092
+ * @author Gabriela de León 21037
  * Clase Stack Pilas Vector
  */
 public class Stack<E>{

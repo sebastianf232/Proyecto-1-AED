@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /**
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructuras de Datos
@@ -10,9 +11,33 @@
 
 public class Main{
     static converter conv = new converter();
+=======
+import java.util.*;
+>>>>>>> Stashed changes
 
+public class Main{
+    static tokenFinder conv = new tokenFinder();
+    static ArrayList<ArrayList<String>> lista = new ArrayList<>();
+    static ArrayList<String> listaA = new ArrayList<>();
+    static ArrayList<String> listatemp = new ArrayList<>();
 
     public static void main(String args[]) {
-        System.out.println(conv.preToPost("*23"));
+        listaA = conv.separate("(* (- x 32) (/ 5 9))");
+        for (int i = 0; i < listaA.size(); i++) {
+            System.out.println(listaA.get(i));
+        }
+        lista = conv.listaLisp(conv.separate("(* (- x 32) (/ 5 9))"));
+        System.out.println("Listas");
+        
+        
+        for (int i = 0; i < lista.size(); i++) {
+            listatemp = lista.get(i);
+            System.out.println("Lista "+i);
+            for (int a = 0; a < listatemp.size(); a++){
+                System.out.println(listatemp.get(a) + " ");
+            }
+        }
+        
+        
     }
 }

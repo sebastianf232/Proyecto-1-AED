@@ -1,5 +1,6 @@
 import java.util.Vector;
 
+<<<<<<< Updated upstream
 /**
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructuras de Datos
@@ -10,6 +11,8 @@ import java.util.Vector;
  * Clase Stack Pilas Vector
  */
 
+=======
+>>>>>>> Stashed changes
 public class Stack<E>{
     Vector<E> v = new Vector<E>();
 

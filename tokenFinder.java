@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.StringBuilder;
 
 import javax.naming.spi.DirStateFactory.Result;
 
@@ -30,6 +31,7 @@ public class tokenFinder {
         } return -1;
     }
 
+<<<<<<< Updated upstream
     /**
      * @param str
      * @return chars
@@ -40,44 +42,79 @@ public class tokenFinder {
         for (char ch : str.toCharArray()) { 
   
             chars.add(ch);
+=======
+    public ArrayList<String> separate(String str){
+        ArrayList<String> chars = new ArrayList<>();
+        ArrayList<Character> espacios = new ArrayList<>();
+        
+        String[] temp = str.split("\\s+");
+        
+        for (int i = 0; i<temp.length; i++){
+            chars.add(temp[i]);
+>>>>>>> Stashed changes
         }
   
         return chars;
     }
+
     
+<<<<<<< Updated upstream
     /**
      * @param l
      * @return listaLisp
      */
     public List<Character> listaLisp(ArrayList l){ ///Metodo que permite aniade los  caracteres en el ArrayList
         ArrayList<Character> listaIn = new ArrayList<>();
+=======
+    public ArrayList<ArrayList<String>> listaLisp(ArrayList l){
+        ArrayList<String> listaIn = new ArrayList<>();
+>>>>>>> Stashed changes
         listaIn = l;
-        ArrayList<Character> lista = new ArrayList<>();
-        ArrayList<ArrayList<Character>> listaFinal = new ArrayList<>();
+        ArrayList<ArrayList<String>> listaFinal = new ArrayList<>();
+        Stack<String> stack = new Stack<>();
         
 
-        for (int i =l.size()-1; i>-1; i--){
-            char c = listaIn.get(i);
+        for (int i =listaIn.size()-1; i>-1; i--){
+            ArrayList<String> lista = new ArrayList<>();
+            String c = listaIn.get(i);
 
-            if (Character.isLetterOrDigit(c)){
-                lista.add(c);
-            if (c == ')'){
-                lista.add(c);
+            if (c.contains("\\d+")){
+                stack.add(c);
+                continue;
             }
-            if (c == '('){
-                lista.add(c);
+            if (c.contains(")")){
+                stack.add(ElParentesis1(c));
+                continue;
+            }
+            if (c.contains("(")) {
+            
+                stack.add(ElParentesis(c));
+                while (!stack.empty()){
+                    lista.add(stack.remove());
+                }
+                
                 listaFinal.add(lista);
-                lista.clear();
+                continue;
+            } if (c.contains("+/-*")){
+                stack.add(c);
+                continue;
+            } else {
+                stack.add(c);
+                continue;
             }
-            else{
-                while (!lista.isEmpty() && prec(c) <= prec(lista.get(lista.size()-1))){
-                    lista.add(c);
-                }
-
-                }
-            }
-
         }
+        return listaFinal;
+    }
+    public String ElParentesis(String str){
+        String b = str.replace("(", "");
+
+        return b;
+
+    }
+    public String ElParentesis1(String str){
+        String b = str.replace(")", "");
+
+        return b;
 
     }
 }

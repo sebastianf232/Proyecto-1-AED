@@ -2,24 +2,42 @@ import java.util.*;
 
 import javax.naming.spi.DirStateFactory.Result;
 
+/**
+ * Universidad del Valle de Guatemala
+ * Algoritmos y Estructuras de Datos
+ * Proyecto 1
+ * @author Juan Miguel Gonzalez-Campo 21077
+ * @author Sebastian Franco 21484
+ * @author Gabriela de Leon 21037
+ * Clase TokenFinder . java
+ */
+
 public class tokenFinder {
-    public int prec(char ch){
+    /**
+     * @param ch
+     * @return
+     */
+    public int prec(char ch){ ///
         switch(ch){
-            case '+':
-            case '-':
-                return 1;
-            case '*':
-            case '/':
-                return 2;
-            case '^':
-                return 3;
+            case '+': ///suma
+            case '-': ///resta
+                return 1; ///Estan en el mismo orden
+            case '*': ///Multiplicacion
+            case '/': ///Division
+                return 2; ///* & / estan en el mismo orden
+            case '^': ///Exponente
+                return 3; 
         } return -1;
     }
 
-    public List<Character> separate(String str){
+    /**
+     * @param str
+     * @return chars
+     */
+    public List<Character> separate(String str){ ///Metodo que separa cada caracter en el ArrayList
         List<Character> chars = new ArrayList<>();
   
-        for (char ch : str.toCharArray()) {
+        for (char ch : str.toCharArray()) { 
   
             chars.add(ch);
         }
@@ -27,7 +45,11 @@ public class tokenFinder {
         return chars;
     }
     
-    public List<Character> listaLisp(ArrayList l){
+    /**
+     * @param l
+     * @return listaLisp
+     */
+    public List<Character> listaLisp(ArrayList l){ ///Metodo que permite aniade los  caracteres en el ArrayList
         ArrayList<Character> listaIn = new ArrayList<>();
         listaIn = l;
         ArrayList<Character> lista = new ArrayList<>();

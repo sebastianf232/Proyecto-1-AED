@@ -38,8 +38,10 @@ public class tokenFinder {
     public ArrayList<String> separate(String str){  ///Metodo que separa cada caracter en el ArrayList
         ArrayList<String> chars = new ArrayList<>();
         ArrayList<Character> espacios = new ArrayList<>();
-        
+        str = str.replace("(", " (");
+
         String[] temp = str.split("\\s+");
+        
         
         for (int i = 0; i<temp.length; i++){
             chars.add(temp[i]);
@@ -54,12 +56,15 @@ public class tokenFinder {
      * @param l
      * @return listaLisp
      */
-    public ArrayList<ArrayList<String>> listaLisp(ArrayList l){ ///Metodo que permite aniade los  caracteres en el ArrayList
+    public ArrayList<ArrayList<String>> listaLisp(String s){ ///Metodo que permite aniade los  caracteres en el ArrayList
+        
         ArrayList<String> listaIn = new ArrayList<>();
+        listaIn = separate(s);
 
-        listaIn = l;
+        
         ArrayList<ArrayList<String>> listaFinal = new ArrayList<>();
         Stack<String> stack = new Stack<>();
+
         
 
         for (int i =listaIn.size()-1; i>-1; i--){

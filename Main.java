@@ -18,11 +18,13 @@ public class Main{
     static ArrayList<String> listatemp = new ArrayList<>();
 
     public static void main(String args[]) {
-        listaA = tokenFinder.separate("(* (- x 32) (/ 5 9))");
-        for (int i = 0; i < listaA.size(); i++) {
-            System.out.println(listaA.get(i));
+        listaA =tokenFinder.separate("((+ (fibonacci (- n 1))(fibonacci (- n 2))))))");
+        for (int j = 0; j < listaA.size(); j++){
+            System.out.println(listaA.get(j));
         }
-        lista = tokenFinder.listaLisp(tokenFinder.separate("(* (- x 32) (/ 5 9))"));
+
+        String str = "((+ (fibonacci (- n 1))(fibonacci (- n 2))))))";
+        lista = tokenFinder.listaLisp(str);
         System.out.println("Listas");
         
         

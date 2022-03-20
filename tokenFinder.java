@@ -37,14 +37,21 @@ public class tokenFinder {
      */
     public ArrayList<String> separate(String str){  ///Metodo que separa cada caracter en el ArrayList
         ArrayList<String> chars = new ArrayList<>();
-        ArrayList<Character> espacios = new ArrayList<>();
         str = str.replace("(", " (");
 
         String[] temp = str.split("\\s+");
         
         
         for (int i = 0; i<temp.length; i++){
-            chars.add(temp[i]);
+                chars.add(temp[i]);
+        }
+        for (int j = 0; j<chars.size(); j++){
+            if (chars.get(j).contains("\\s+")){
+                chars.remove(j);
+                continue;
+            } else{
+                continue;
+            }
         }
   
         return chars;
@@ -76,18 +83,34 @@ public class tokenFinder {
                 continue;
             }
             if (c.contains(")")){
-                stack.add(ElParentesis1(c));
-                continue;
-            }
-            if (c.contains("(")) {
-            
-                stack.add(ElParentesis(c));
-                while (!stack.empty()){
-                    lista.add(stack.remove());
+                if (c.length()>1){
+                    stack.add(ElParentesis1(c));
+                    continue;
+                    }
+                else {
+                    continue;
                 }
                 
-                listaFinal.add(lista);
-                continue;
+            }
+            if (c.contains("(")) {
+                if (c.length()>1){
+                    stack.add(ElParentesis(c));
+                    while (!stack.empty()){
+                        lista.add(stack.remove());
+                    }
+                
+                    listaFinal.add(lista);
+                    continue;
+                    }
+                else {
+                    while (!stack.empty()){
+                        lista.add(stack.remove());
+                    }
+                
+                    listaFinal.add(lista);
+                    continue;
+                }
+        
             } if (c.contains("+/-*")){
                 stack.add(c);
                 continue;

@@ -16,25 +16,37 @@ public class Main{
     static ArrayList<ArrayList<String>> lista = new ArrayList<>();
     static ArrayList<String> listaA = new ArrayList<>();
     static ArrayList<String> listatemp = new ArrayList<>();
-
+    
     public static void main(String args[]) {
-        listaA =tokenFinder.separate("((+ (fibonacci (- n 1))(fibonacci (- n 2))))))");
-        for (int j = 0; j < listaA.size(); j++){
-            System.out.println(listaA.get(j));
-        }
-
-        String str = "((+ (fibonacci (- n 1))(fibonacci (- n 2))))))";
-        lista = tokenFinder.listaLisp(str);
-        System.out.println("Listas");
-        
-        
-        for (int i = 0; i < lista.size(); i++) {
-            listatemp = lista.get(i);
-            System.out.println("Lista "+(i+1));
-            for (int a = 0; a < listatemp.size(); a++){
-                System.out.println(listatemp.get(a) + " ");
+        Scanner scan = new Scanner(System.in);
+        funciones fn = new funciones();
+        parser ps = new parser();
+        boolean on = true;
+        while (on){
+            Map<String, ArrayList<ArrayList<String>>> defuns = new HashMap<>();
+            System.out.println("Ingrese la expresion LISP  o ingrese END para salir");
+            String oper = scan.nextLine();
+            if (oper.equals("END")){
+                break;
             }
+            lista = tokenFinder.listaLisp(oper);
+            
+            System.out.println("Listas");
+            
+            
+            for (int i = 0; i < lista.size(); i++) {
+                listatemp = lista.get(i);
+                System.out.println("Lista "+(i+1));
+                for (int a = 0; a < listatemp.size(); a++){
+                    System.out.println(listatemp.get(a) + " " );
+                }
+            }
+            
+            System.out.println("\n");
+            ps.parseFull(lista, defuns);
+            System.out.println("\n");
         }
+        
         
         
     }

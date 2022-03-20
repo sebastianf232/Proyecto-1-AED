@@ -7,9 +7,11 @@
  * @author Gabriela de León 21037
  * Prueba unitaria Stack
  */
-import org.junit.jupiter.api.Test;
+import org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class StackTest {
     private final Stack<Double> s = new Stack<>();
@@ -24,21 +26,21 @@ public class StackTest {
     void remove() {
         s.add(5.0);
         s.add(4.0);
-        assertEquals(4,s.remove(),"Hay un error al remover el elemento del stack");
+        assertEquals(4 , s.remove(), 0.1);
     }
 
     @Test
     void peek(){
         s.add(5.0);
         s.add(4.0);
-        assertEquals(4,s.peek(),"Hay un error al obtener el objeto del stack");
+        assertEquals(4,s.peek(),0.1);
     }
 
     @Test
     void size(){
         s.add(5.0);
         s.add(4.0);
-        assertEquals(2,s.size(),"Hay un error al obtener el tamaño del objeto del stack");
+        assertEquals(2,s.size(),0.1);
     }
 
     @Test

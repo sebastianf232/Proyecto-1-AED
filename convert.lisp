@@ -1,4 +1,2 @@
-(defun fahrtocent(x)
-  (* (- x 32) (/ 5 9))
-)
+(defun fahrtocent(x) (* (- x 32) (/ 5 9)))
 

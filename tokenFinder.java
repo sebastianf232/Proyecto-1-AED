@@ -17,7 +17,7 @@ public class tokenFinder {
      * @param ch
      * @return
      */
-    public int prec(char ch){ ///
+    public int prec(char ch){ ///Prefci
         switch(ch){
             case '+': ///suma
             case '-': ///resta
@@ -98,13 +98,13 @@ public class tokenFinder {
         }
         return listaFinal;
     }
-    public String ElParentesis(String str){
+    public String ElParentesis(String str){///Lee el parentesis inicial
         String b = str.replace("(", "");
 
         return b;
 
     }
-    public String ElParentesis1(String str){
+    public String ElParentesis1(String str){ ///Lee el parentesis final
         String b = str.replace(")", "");
 
         return b;

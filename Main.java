@@ -22,8 +22,10 @@ public class Main{
         funciones fn = new funciones();
         parser ps = new parser();
         boolean on = true;
+        Map<String, ArrayList<ArrayList<String>>> defuns = new HashMap<>();
+        Map<String, String> funcparams = new HashMap<>();
         while (on){
-            Map<String, ArrayList<ArrayList<String>>> defuns = new HashMap<>();
+            
             System.out.println("Ingrese la expresion LISP  o ingrese END para salir");
             String oper = scan.nextLine();
             if (oper.equals("END")){
@@ -31,23 +33,11 @@ public class Main{
             }
             lista = tokenFinder.listaLisp(oper);
             
-            System.out.println("Listas");
             
-            
-            for (int i = 0; i < lista.size(); i++) {
-                listatemp = lista.get(i);
-                System.out.println("Lista "+(i+1));
-                for (int a = 0; a < listatemp.size(); a++){
-                    System.out.println(listatemp.get(a) + " " );
-                }
-            }
             
             System.out.println("\n");
-            ps.parseFull(lista, defuns);
+            ps.parseFull(lista, defuns, funcparams);
             System.out.println("\n");
         }
-        
-        
-        
     }
 }

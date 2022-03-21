@@ -78,9 +78,26 @@ public class tokenFinder {
             ArrayList<String> lista = new ArrayList<>();
             String c = listaIn.get(i);
 
-            if (c.contains("\\d+")){
-                stack.add(c);
-                continue;
+            if (c.contains("(") && c.contains(")")){
+                if (c.length()>1){
+                    c = ElParentesis(c);
+                    c = ElParentesis1(c);
+                    stack.add(c);
+                    while (!stack.empty()){
+                        lista.add(stack.remove());
+                    }
+                
+                    listaFinal.add(lista);
+                    continue;
+                    }
+                else {
+                    while (!stack.empty()){
+                        lista.add(stack.remove());
+                    }
+                
+                    listaFinal.add(lista);
+                    continue;
+                }
             }
             if (c.contains(")")){
                 if (c.length()>1){
@@ -110,8 +127,12 @@ public class tokenFinder {
                     listaFinal.add(lista);
                     continue;
                 }
-        
-            } if (c.contains("+/-*")){
+            } 
+            if (c.contains("\\d+")){
+                stack.add(c);
+                continue;
+            }
+            if (c.contains("+/-*")){
                 stack.add(c);
                 continue;
             } else {

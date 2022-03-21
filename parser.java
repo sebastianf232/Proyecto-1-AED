@@ -1,13 +1,16 @@
+import java.lang.annotation.Retention;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Map;
+
+import org.junit.runners.parameterized.ParametersRunnerFactory;
 
 public class parser {
     tokenFinder tf = new tokenFinder();
     funciones fn = new funciones();
     calculator calc = new calculator();
 
-    public void parseFull(ArrayList<ArrayList<String>> a, Map<String, ArrayList<ArrayList<String>>> p){
+    public void parseFull(ArrayList<ArrayList<String>> a, Map<String, ArrayList<ArrayList<String>>> p, Map<String, String> par){
         tokenFinder tf = new tokenFinder();
         funciones fn = new funciones();
         int i = a.size()-1;
@@ -18,27 +21,52 @@ public class parser {
             if (p.containsKey(s.get(0))){
                 ArrayList<ArrayList<String>> evalfun = p.get(s.get(0));
                 String evalparam = s.get(1);
+                System.out.print("replace: "+ evalparam);
+
+                String param = par.get(s.get(0));
+                System.out.println("Param: "+param);
 
                 
+                ArrayList<ArrayList<String>> evalinst = new ArrayList<>();
+                
 
+                evalinst = replaceparam(evalparam, param, evalfun);
+                
+                
+                par.replace(s.get(0), param, evalparam);
+                parseFull(evalinst, p, par);
+                break;
             }
             if (s.contains("DEFUN")){
+                if (p.containsKey(s.get(1))){
+                    System.out.println("no puede redefinir funcion");
+                    break;
+                }
                 String name = s.get(1);
-                ifZero(i);
+                on = ifZero(i);
                 i--;
                 ArrayList<String> param = a.get(i);
 
-                ArrayList<ArrayList<String>> func = new ArrayList<>();
+                String finalParam = param.get(0);
+                ArrayList<ArrayList<String>> functemp = new ArrayList<>();
 
-                func.add(param);
-                while (i >= 0){
+                
+                while (i > 0){
                     
-                    ifZero(i);
+                    on = ifZero(i);
                     i--;
-                    func.add(a.get(i));
+                    functemp.add(a.get(i));
                     
                 }
+                ArrayList<ArrayList<String>> func = new ArrayList<>();
+                for (int r = functemp.size()-1; r >= 0; r--){
+                    func.add(functemp.get(r));
+                }
+                
                 p.put(name, func);
+                par.put(name, finalParam);
+                System.out.println("Función -"+name+"- aniadida. Param: "+ finalParam);
+                
                 break;
 
 
@@ -88,11 +116,12 @@ public class parser {
                     if (parse(condic) == 1){
                         ifZero(i);
                         i--;
-                        System.out.println(calc.evaluatePrefix(a.get(i)));
+                        System.out.println("Respuesta: "+calc.evaluatePrefix(a.get(i)));
                         
                         break;
                     }
                     else{
+                        System.out.println("No se cumple la condución");
                         break;
                     }
                 } else {
@@ -123,7 +152,7 @@ public class parser {
                 break;
             }
             else {
-                System.out.println(calc.evaluatePrefix(s));
+                System.out.println("Respuesta: "+calc.evaluatePrefix(s));
                 break;
             }
         }
@@ -166,11 +195,29 @@ public class parser {
             return 0;
         }
     }
-    public void ifZero(int i){
+    public Boolean ifZero(int i){
         if (i == 0){
             System.out.println("Expresión invalida");
+            return false;
+        }
+        return true;
+        
+    }
+    public ArrayList<ArrayList<String>> replaceparam(String replace, String param, ArrayList<ArrayList<String>> eval){
+        ArrayList<ArrayList<String>> evalfun = eval;
+        for (int q = 0; q < evalfun.size(); q++){
+            if (evalfun.get(q).contains(param)){
+                
+                for (int w = 0; w<evalfun.get(q).size()-1; w++){
+                    if (evalfun.get(q).get(w).equals(param)){
+                        evalfun.get(q).set(w, replace);
+                    }
+                }
+            }
+
         }
         
+        return evalfun;
     }
     
 }

@@ -38,6 +38,7 @@ public class funciones {
             Double primero, segundo;
             primero = Double.parseDouble(a.get(1));
             segundo = Double.parseDouble(a.get(2));
+            System.out.println(primero+ " < "+ segundo);
             if (primero < segundo){
                 return 1;
             }

@@ -5,11 +5,27 @@ import java.util.Map;
 
 import org.junit.runners.parameterized.ParametersRunnerFactory;
 
+/**
+ * Universidad del Valle de Guatemala
+ * Algoritmos y Estructuras de Datos
+ * Proyecto 1
+ * @author Juan Miguel Gonzalez-Campo 21077
+ * @author Sebastian Franco 21484
+ * @author Gabriela de Leon 21037
+ * Clase Parser
+ */
+
 public class parser {
     tokenFinder tf = new tokenFinder();
     funciones fn = new funciones();
     calculator calc = new calculator();
 
+    /**
+     * @param a
+     * @param p
+     * @param par
+     * Permite parsear segun lo que se indica.
+     */
     public void parseFull(ArrayList<ArrayList<String>> a, Map<String, ArrayList<ArrayList<String>>> p, Map<String, String> par){
         tokenFinder tf = new tokenFinder();
         funciones fn = new funciones();
@@ -18,7 +34,7 @@ public class parser {
         while(on){
             ArrayList<String> s = new ArrayList<>();
             s = a.get(i);
-            if (p.containsKey(s.get(0))){
+            if (p.containsKey(s.get(0))){ ///Evalua si se ingreso alguna operacion
                 ArrayList<ArrayList<String>> evalfun = p.get(s.get(0));
                 String evalparam = s.get(1);
                 System.out.print("replace: "+ evalparam);
@@ -37,7 +53,7 @@ public class parser {
                 parseFull(evalinst, p, par);
                 break;
             }
-            if (s.contains("DEFUN")){
+            if (s.contains("DEFUN")){ //DEFUN
                 if (p.containsKey(s.get(1))){
                     System.out.println("no puede redefinir funcion");
                     break;
@@ -72,13 +88,13 @@ public class parser {
 
 
             }
-            if (s.contains("ATOM")){
+            if (s.contains("ATOM")){ //ATOM
                 
             }
-            if (s.contains("LIST")){
+            if (s.contains("LIST")){ //LIST
                 
             }
-            if (s.contains("QUOTE") || s.contains("'")){
+            if (s.contains("QUOTE") || s.contains("'")){ //QUOTE
                 
             }
             if (s.contains(">")){
@@ -105,7 +121,7 @@ public class parser {
                 break;
                 
             }
-            if (s.contains("COND")){
+            if (s.contains("COND")){ ///COND
                 if(a.get(i-1).size() < 2){
                     on = ifZero(i);
                     i--;
@@ -141,7 +157,7 @@ public class parser {
                     }
                 }
             }
-            if (s.contains("EQUAL")){
+            if (s.contains("EQUAL")){ ///EQUAL
                 int k = fn.equal(s);
                 if (k == 1){
                     System.out.println("TRUE");
@@ -157,7 +173,12 @@ public class parser {
             }
         }
     }
-    public int parse(ArrayList<String> s){
+
+    /**
+     * @param s
+     * @return 0
+     */
+    public int parse(ArrayList<String> s){ ///Permite que el programa no creashee
         if (s.contains("DEFUN")){
             return 0;
         }
@@ -195,7 +216,12 @@ public class parser {
             return 0;
         }
     }
-    public Boolean ifZero(int i){
+
+    /**
+     * @param i
+     * @return boolean
+     */
+    public Boolean ifZero(int i){ ///Indica que la expresion no es valida
         if (i == 0){
             System.out.println("Expresión invalida");
             return false;
@@ -203,6 +229,15 @@ public class parser {
         return true;
         
     }
+
+    /**
+     * 
+     * @param replace
+     * @param param
+     * @param eval
+     * @return
+     * Permite reemplazar el parametro
+     */
     public ArrayList<ArrayList<String>> replaceparam(String replace, String param, ArrayList<ArrayList<String>> eval){
         ArrayList<ArrayList<String>> evalfun = eval;
         for (int q = 0; q < evalfun.size(); q++){

@@ -1,9 +1,23 @@
 import java.util.ArrayList;
 import java.util.concurrent.locks.Condition;
 
+/**
+ * Universidad del Valle de Guatemala
+ * Algoritmos y Estructuras de Datos
+ * Proyecto 1
+ * @author Juan Miguel Gonzalez-Campo 21077
+ * @author Sebastian Franco 21484
+ * @author Gabriela de Leon 21037
+ * Clase Funciones
+ */
+
 public class funciones {
 
-    public int greater(ArrayList<String> a){
+    /**
+     * @param a
+     * @return numero
+     */
+    public int greater(ArrayList<String> a){ ///Mayor
         if (a.size() > 3){
 
             System.out.println("Operación invalida");
@@ -21,7 +35,12 @@ public class funciones {
             }
         }  
     }
-    public int lesser(ArrayList<String> a){
+
+    /**
+     * @param a
+     * @return numero
+     */
+    public int lesser(ArrayList<String> a){ ///Menor
         if (a.size() > 3){
 
             System.out.println("Operación invalida");
@@ -40,7 +59,12 @@ public class funciones {
             }
         }  
     }
-    public int equal(ArrayList<String> a){
+
+    /**
+     * @param a
+     * @return numero
+     */
+    public int equal(ArrayList<String> a){ ///Igual
         if (a.size() > 3){
 
             System.out.println("Operación invalida");

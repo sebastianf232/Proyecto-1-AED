@@ -21,6 +21,10 @@ import javax.lang.model.util.ElementScanner6;
 public class calculator {
     public static final Pattern DOUBLE = Pattern.compile("\\d");
 
+    /**
+     * @param c
+     * @return boolean
+     */
     public Boolean isOperand(String c) {
         if (DOUBLE.matcher(c).find()) {
             return true;
@@ -29,6 +33,10 @@ public class calculator {
         }
     }
  
+    /**
+     * @param a
+     * @return continue, 0
+     */
     public double evaluatePrefix(ArrayList<String> a)
     {
         Stack<Double> Stack = new Stack<Double>();

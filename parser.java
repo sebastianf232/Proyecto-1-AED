@@ -100,7 +100,12 @@ public class parser {
                 
             }
             if (s.contains("QUOTE") || s.contains("'")){ //QUOTE
-                
+                String j ="";
+                for (String x:s){
+                    j+=x;
+                    j+=" ";
+                }
+                System.out.println(j);      
             }
             if (s.contains(">")){
                 int k = fn.greater(s);

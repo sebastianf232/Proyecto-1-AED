@@ -3,13 +3,6 @@ import java.util.concurrent.locks.Condition;
 
 public class funciones {
 
-
-    public void defun(){
-        
-    }
-    public void COND(ArrayList<String> a){
-        
-    }
     public int greater(ArrayList<String> a){
         if (a.size() > 3){
 

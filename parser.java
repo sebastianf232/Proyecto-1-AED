@@ -73,7 +73,7 @@ public class parser {
 
             }
             if (s.contains("ATOM")){
-              
+                
             }
             if (s.contains("LIST")){
                 
@@ -90,7 +90,7 @@ public class parser {
                     System.out.println("FALSE");
                 }
                 
-                i--;
+                break;
                 
 
             }
@@ -102,19 +102,19 @@ public class parser {
                 if (k == 0){
                     System.out.println("FALSE");
                 }
-                i--;
+                break;
                 
             }
             if (s.contains("COND")){
                 if(a.get(i-1).size() < 2){
-                    ifZero(i);
+                    on = ifZero(i);
                     i--;
                     ArrayList<String> condic = new ArrayList<>();
                     condic = a.get(i-1);
-                    ifZero(i);
+                    on = ifZero(i);
                     i--;
                     if (parse(condic) == 1){
-                        ifZero(i);
+                        on = ifZero(i);
                         i--;
                         System.out.println("Respuesta: "+calc.evaluatePrefix(a.get(i)));
                         

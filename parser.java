@@ -89,7 +89,12 @@ public class parser {
 
             }
             if (s.contains("ATOM")){ //ATOM
-                
+                if (s.size()==2){
+                    System.out.println("TRUE"); // devuelve TRUE al no ser una lista
+                }
+                if (s.size()>2){
+                    System.out.println("FALSE"); // devuelve FALSE al ser una lista
+                }   
             }
             if (s.contains("LIST")){ //LIST
                 

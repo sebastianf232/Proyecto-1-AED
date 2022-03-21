@@ -97,16 +97,22 @@ public class parser {
                 }   
             }
             if (s.contains("LIST")){ //LIST
-                
+                if (s.size()==2){
+                    System.out.println("FALSE"); //Devuelve FALSE al no ser una lista
+                }
+                if (s.size()>2){
+                    System.out.println("TRUE"); // // devuelve TRUE al ser una lista
+                }
             }
             if (s.contains("QUOTE") || s.contains("'")){ //QUOTE
                 String j ="";
-                for (String x:s){
+                for (String x:s){ ///Se devuelve lo que se escribió
                     j+=x;
                     j+=" ";
                 }
                 System.out.println(j);      
             }
+
             if (s.contains(">")){
                 int k = fn.greater(s);
                 if (k == 1){

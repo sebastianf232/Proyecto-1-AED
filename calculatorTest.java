@@ -13,21 +13,32 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class calculatorTest {
-    String c;
-    ArrayList<String> a = new ArrayList<>();
-    @Test
-    void isOperand(){
-    }
+    private final tokenFinder tf = new tokenFinder();
+    private final calculator calc = new calculator();
     
     @Test
-    void evaluatePrefix(){
+    public void evalPre(){
+        
+        ArrayList<String> op1 = new ArrayList<>();
+        op1.add("+");
+        op1.add("10");
+        op1.add("10");
+        assertEquals(calc.evaluatePrefix(op1), 20, 0.01);
     }
-    
+
     @Test
-    void calculate(){
+    public void calculate(){
+        String op = "(+ (* 2 2)(/ 5 10))";
+        assertEquals(calc.calculate(tf.listaLisp(op)), 4.5, 0.01);
     }
-    
     @Test
-    void ifZero(){
+    public void isOperand(){
+        assertEquals(calc.isOperand("/"), false);
+        assertEquals(calc.isOperand("+"), false);
+        assertEquals(calc.isOperand("-"), false);
+        assertEquals(calc.isOperand("*"), false);
+        assertEquals(calc.isOperand("1"), true);
+        assertEquals(calc.isOperand("2"), true);
+        assertEquals(calc.isOperand("3"), true);
     }
 }

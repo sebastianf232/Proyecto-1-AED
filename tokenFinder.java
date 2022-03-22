@@ -13,22 +13,7 @@ import javax.naming.spi.DirStateFactory.Result;
  */
 
 public class tokenFinder {
-    /**
-     * @param ch
-     * @return
-     */
-    public int prec(char ch){ ///Prefci
-        switch(ch){
-            case '+': ///suma
-            case '-': ///resta
-                return 1; ///Estan en el mismo orden
-            case '*': ///Multiplicacion
-            case '/': ///Division
-                return 2; ///* & / estan en el mismo orden
-            case '^': ///Exponente
-                return 3; 
-        } return -1;
-    }
+    
 
 
     /**

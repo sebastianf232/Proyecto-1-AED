@@ -28,7 +28,7 @@ public class Main{
             
             System.out.println("Ingrese la expresion LISP  o ingrese END para salir");
             String oper = scan.nextLine();
-            if (oper.equals("END")){
+            if (oper.equalsIgnoreCase("END")){
                 break;
             }
             lista = tokenFinder.listaLisp(oper);

@@ -14,8 +14,10 @@ import java.util.concurrent.locks.Condition;
 public class funciones {
 
     /**
+     * Implementa el operador > de lisp
+     * 
      * @param a
-     * @return numero
+     * @return 1 si es verdadero, 0 si es falso y 3 si es invalida la operacion
      */
     public int greater(ArrayList<String> a){ ///Mayor
         if (a.size() > 3){
@@ -37,8 +39,9 @@ public class funciones {
     }
 
     /**
+     * Implementa < de lisp
      * @param a
-     * @return numero
+     * @return 1 si es verdadero, 0 si es falso y 3 si es invalida la operacion
      */
     public int lesser(ArrayList<String> a){ ///Menor
         if (a.size() > 3){
@@ -61,8 +64,9 @@ public class funciones {
     }
 
     /**
+     * Implementa EQUAl o = de lisp
      * @param a
-     * @return numero
+     * @return 1 si es verdadero, 0 si es falso y 3 si es invalida la operacion
      */
     public int equal(ArrayList<String> a){ ///Igual
         if (a.size() > 3){

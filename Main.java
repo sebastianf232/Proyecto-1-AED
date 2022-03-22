@@ -16,9 +16,9 @@ public class Main{
     static ArrayList<ArrayList<String>> lista = new ArrayList<>();
     static ArrayList<String> listaA = new ArrayList<>();
     static ArrayList<String> listatemp = new ArrayList<>();
-    static Map<String, ArrayList<ArrayList<String>>> defuns = new HashMap<>();
-    static Map<String, ArrayList<String>> funcparams = new HashMap<>();
-    static Map<String, ArrayList<String>> vars = new HashMap<>();
+    static Map<String, ArrayList<ArrayList<String>>> defuns = new HashMap<>(); //guarda funciones
+    static Map<String, ArrayList<String>> funcparams = new HashMap<>(); // guarda funciones y su parametro
+    static Map<String, ArrayList<String>> vars = new HashMap<>(); // guarda variables 
     public static void main(String args[]) {
         Scanner scan = new Scanner(System.in);
         funciones fn = new funciones();

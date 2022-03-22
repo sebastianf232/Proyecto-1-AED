@@ -52,7 +52,7 @@ public class tokenFinder {
      * @param l
      * @return listaLisp
      */
-    public ArrayList<ArrayList<String>> listaLisp(String s){ ///Metodo que permite aniade los  caracteres en el ArrayList
+    public ArrayList<ArrayList<String>> listaLisp(String s){ ///Metodo que permite aniadir los  caracteres en el ArrayList
         
         ArrayList<String> listaIn = new ArrayList<>();
         if (separate(s) == null){
@@ -134,13 +134,13 @@ public class tokenFinder {
         }
         return listaFinal;
     }
-    public String ElParentesis(String str){///Lee el parentesis inicial
+    public String ElParentesis(String str){///quita el parentesis inicial
         String b = str.replace("(", "");
 
         return b;
 
     }
-    public String ElParentesis1(String str){ ///Lee el parentesis final
+    public String ElParentesis1(String str){ ///quita el parentesis final
         String b = str.replace(")", "");
 
         return b;

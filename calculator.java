@@ -25,7 +25,10 @@ public class calculator {
     /**
      * @param c
      * @return boolean
+     * 
+     * Dice si un caracter es un operando (numero)
      */
+
     public Boolean isOperand(String c) {
         if (DOUBLE.matcher(c).find()) {
             return true;
@@ -36,7 +39,9 @@ public class calculator {
  
     /**
      * @param a
-     * @return continue, 0
+     * @return respuesta, 0.0 si no es valida
+     * 
+     * evalua una operacion prefix simple
      */
     public Double evaluatePrefix(ArrayList<String> a)
     {
@@ -87,6 +92,13 @@ public class calculator {
             return 0.0;
         }
     }
+
+    /**
+     * Logica para poder realizar operaciones artimeticas complejas
+     * 
+     * @param a
+     * @return double respuesta o 0 si no es valida
+     */
     public Double calculate(ArrayList<ArrayList<String>> a){
         int i = 0;
         Stack<String> temp = new Stack<>();
@@ -172,6 +184,12 @@ public class calculator {
         }           
     
     }      
+    /**
+     * Utilizado para saber si se llego al fin de la lista y evitar errores de fuera de rango
+     * @param i
+     * @param a
+     * @return true si no se ha llegado al final, false si si.
+     */
     public boolean ifZero(int i, ArrayList a){
         if (i == a.size()-1){
             return false;

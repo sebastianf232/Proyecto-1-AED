@@ -37,8 +37,9 @@ public class parser {
         boolean replaced = false;
         while(on){
             ArrayList<String> s = new ArrayList<>();
-            s = a.get(i);
+            s = a.get(i); 
 
+            // Primero busca en la lista S si se encuentra una variable declarada anteriormente
             for (int u = 0; u<s.size(); u++){
                 if (var.containsKey(s.get(u))){
                     ArrayList<String> varRep = new ArrayList<>();
@@ -51,7 +52,7 @@ public class parser {
                     continue;
                 }
             }
-
+            // Si encontro una variable en el loop anterior y la reemplazo, parsea de nuevo con la operacion cambiada
             if (replaced == true){
                 parseFull(a, p, par, var);
                 break;
@@ -59,7 +60,7 @@ public class parser {
             if (p.containsKey(s.get(0))){ ///Evalua si se ingreso alguna funcion ya definida
                 ArrayList<ArrayList<String>> evalfun = new ArrayList<>();
 
-                Iterator<ArrayList<String>> iterator = p.get(s.get(0)).iterator();
+                Iterator<ArrayList<String>> iterator = p.get(s.get(0)).iterator(); //permite crear un clon de la lista sin cambiar la original
                 
                 while(iterator.hasNext()){
                     evalfun.add((ArrayList<String>) iterator.next().clone());
@@ -74,7 +75,7 @@ public class parser {
 
                 ArrayList<String> param = par.get(s.get(0));
                 
-                if (evalparam.size() != param.size()){
+                if (evalparam.size() != param.size()){ //Evalua si la cantidad de parametros es correcta
                     System.out.println("Cantidad de parametros equivocada");
                     break;
                     
@@ -82,18 +83,16 @@ public class parser {
                 
                 ArrayList<ArrayList<String>> evalinst = new ArrayList<>();
                 
-
+                //Reemplaza los parametros
                 evalinst = replaceparam(evalparam, param, evalfun);
                 
                 
-                
-                System.out.print(par.get(s.get(0)));
-                System.out.print(evalinst);
+                //Realiza el parse con los parametros cambiados
                 parseFull(evalinst, p, par, var);
                 
                 break;
             }
-            if (s.contains("DEFUN") || s.contains("defun")){ //DEFUN
+            if (s.contains("DEFUN") || s.contains("defun")){ //DEFUN permite definir funciones y guardarlas
                 if (p.containsKey(s.get(1))){
                     System.out.println("no puede redefinir una funcion");
                     break;
@@ -104,7 +103,7 @@ public class parser {
                 ArrayList<String> param = a.get(i);
 
                 
-                ArrayList<ArrayList<String>> functemp = new ArrayList<>();
+                ArrayList<ArrayList<String>> functemp = new ArrayList<>(); 
 
                 
                 while (i > 0){
@@ -116,11 +115,11 @@ public class parser {
                 }
                 ArrayList<ArrayList<String>> func = new ArrayList<>();
                 for (int r = functemp.size()-1; r >= 0; r--){
-                    func.add(functemp.get(r));
-                }
+                    func.add(functemp.get(r)); //lo que ejecuta la funcion sin parametros y sin nombre
+                } 
                 
-                p.put(name, func);
-                par.put(name, param);
+                p.put(name, func); //aniade el nombre de la funcion como key y lo que ejecuta como value
+                par.put(name, param); //aniade el nombre de la funcion como key y sus parametros como value
                 System.out.println("Función -"+name+"- aniadida. Param: "+ param);
                 
                 break;
@@ -175,8 +174,8 @@ public class parser {
                 continue;    
             }
 
-            if (s.contains(">")){
-                int k = fn.greater(s);
+            if (s.contains(">")){ //llama a funcion greater
+                int k = fn.greater(s); 
                 if (k == 1){
                     System.out.println("TRUE");
                 }
@@ -189,7 +188,7 @@ public class parser {
                 
 
             }
-            if (s.contains("<")){
+            if (s.contains("<")){ //llama funcion lesser
                 int k = fn.lesser(s);
                 if (k == 1){
                     System.out.println("TRUE");
@@ -204,7 +203,7 @@ public class parser {
             }
             if (s.contains("COND") || s.contains("cond")){ ///COND
                 for (int f = i; f >= 0; f--){
-                    if (a.get(f).contains("t")){
+                    if (a.get(f).contains("t")){ //Si encuentra "t" evalua por default
                         on = ifZero(f);
                         f--;
                         System.out.println("Respuesta: "+calc.evaluatePrefix(a.get(f)));
@@ -215,23 +214,23 @@ public class parser {
                         ArrayList<String> condic = new ArrayList<>();
                         condic = a.get(f);
                         
-                        if (parse(condic) == 1){
+                        if (parse(condic) == 1){ //Si la condicion encontrada resulta 1 (verdadera) entonces se opera su par.
                             on = ifZero(f);
                             f--;
                             System.out.println("Respuesta: "+calc.evaluatePrefix(a.get(f)));
                             
                             break;
                         }
-                        if (parse(condic) == 3){
+                        if (parse(condic) == 3){ //si una condicion no es valida se termina la ejecucion
                             System.out.println("Condicion invalida");
                             break;
                         }
                         else{
                             if (f == i){
-                                on = ifZero(f);
+                                on = ifZero(f); 
                                 f--;
                                 continue;
-                            } else {
+                            } else { //Avisa si no se cumple la condicion y continua el loop
                                 System.out.println("No se cumple la condición");
                                 on = ifZero(f);
                                 f--;
@@ -246,7 +245,7 @@ public class parser {
 
                 
             }
-            if (s.contains("EQUAL") || s.contains("=")){ ///EQUAL
+            if (s.contains("EQUAL") || s.contains("=")){ ///EQUAL implementa el metodo equal
                 int k = fn.equal(s);
                 if (k == 1){
                     System.out.println("TRUE");
@@ -256,7 +255,7 @@ public class parser {
                 }
                 break;
             }
-            if (s.contains("setq") || s.contains("SETQ")){
+            if (s.contains("setq") || s.contains("SETQ")){ //Permite declarar variables para ser usadas luego
                 String varName;
                 ArrayList<String> varValue = new ArrayList<>();
                 if (s.size() > 2){
@@ -264,7 +263,7 @@ public class parser {
                         varName = s.get(q);
                         q++;
                         varValue.add(s.get(q));
-                        var.put(varName, varValue);
+                        var.put(varName, varValue); //añade la variable y su valor (solo valores atoms, no listas) al mapa 
                         System.out.println("Variable -"+varName+"- valor: "+varValue);
                     }
                     on = ifZero(i);
@@ -277,7 +276,7 @@ public class parser {
                 
             }
 
-            else {
+            else { //SI no se encuentra ninguno de los casos anteriores se intenta operar la funcion
                 System.out.println("Respuesta: "+calc.calculate(a));
                 break;
             }
@@ -288,7 +287,7 @@ public class parser {
      * @param s
      * @return 0
      */
-    public int parse(ArrayList<String> s){ ///Permite que el programa no creashee
+    public int parse(ArrayList<String> s){ ///Permite realizar la funcion COND
         if (s.contains("DEFUN")){
             return 0;
         }
@@ -346,7 +345,7 @@ public class parser {
      * @param param
      * @param eval
      * @return
-     * Permite reemplazar el parametro
+     * Permite reemplazar el parametro y las variables
      */
     public ArrayList<ArrayList<String>> replaceparam(ArrayList<String> replace, ArrayList<String> param, ArrayList<ArrayList<String>> eval){
         ArrayList<ArrayList<String>> evalfun = eval;

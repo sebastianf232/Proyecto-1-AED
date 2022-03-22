@@ -34,7 +34,7 @@ public class parser {
         while(on){
             ArrayList<String> s = new ArrayList<>();
             s = a.get(i);
-            if (p.containsKey(s.get(0))){ ///Evalua si se ingreso alguna operacion
+            if (p.containsKey(s.get(0))){ ///Evalua si se ingreso alguna funcion ya definida
                 ArrayList<ArrayList<String>> evalfun = p.get(s.get(0));
                 String evalparam = s.get(1);
                 System.out.print("replace: "+ evalparam);
@@ -53,7 +53,7 @@ public class parser {
                 parseFull(evalinst, p, par);
                 break;
             }
-            if (s.contains("DEFUN")){ //DEFUN
+            if (s.contains("DEFUN") || s.contains("defun")){ //DEFUN
                 if (p.containsKey(s.get(1))){
                     System.out.println("no puede redefinir funcion");
                     break;
@@ -88,15 +88,24 @@ public class parser {
 
 
             }
-            if (s.contains("ATOM")){ //ATOM
+            if (s.contains("ATOM") || s.contains("atom")){ //ATOM
                 if (s.size()==2){
                     System.out.println("TRUE"); // devuelve TRUE al no ser una lista
+                    break;
                 }
+                
                 if (s.size()>2){
                     System.out.println("FALSE"); // devuelve FALSE al ser una lista
+                    break;
                 }   
+                if (s.size() == 1){
+                    if (a.size() > 1){
+                        System.out.println("FALSE"); // devuelve FALSE al ser una lista
+                        break;
+                    }
+                }
             }
-            if (s.contains("LIST")){ //LIST
+            if (s.contains("LIST") || s.contains("list")){ //LIST
                 if (s.size()==2){
                     System.out.println("FALSE"); //Devuelve FALSE al no ser una lista
                 }
@@ -106,11 +115,14 @@ public class parser {
             }
             if (s.contains("QUOTE") || s.contains("'")){ //QUOTE
                 String j ="";
-                for (String x:s){ ///Se devuelve lo que se escribió
-                    j+=x;
+                for (int q = 1; q < s.size(); q++){ ///Se devuelve lo que se escribió
+                    j+=s.get(q);
                     j+=" ";
                 }
-                System.out.println(j);      
+                System.out.println(j);
+                on = ifZero(i);
+                i--;
+                continue;    
             }
 
             if (s.contains(">")){
@@ -121,8 +133,9 @@ public class parser {
                 if (k == 0){
                     System.out.println("FALSE");
                 }
-                
-                break;
+                on = ifZero(i);
+                i--;
+                continue;
                 
 
             }
@@ -134,44 +147,54 @@ public class parser {
                 if (k == 0){
                     System.out.println("FALSE");
                 }
-                break;
+                on = ifZero(i);
+                i--;
+                continue;
                 
             }
-            if (s.contains("COND")){ ///COND
-                if(a.get(i-1).size() < 2){
-                    on = ifZero(i);
-                    i--;
-                    ArrayList<String> condic = new ArrayList<>();
-                    condic = a.get(i-1);
-                    on = ifZero(i);
-                    i--;
-                    if (parse(condic) == 1){
-                        on = ifZero(i);
-                        i--;
-                        System.out.println("Respuesta: "+calc.evaluatePrefix(a.get(i)));
+            if (s.contains("COND") || s.contains("cond")){ ///COND
+                for (int f = i; f >= 0; f--){
+                    if (a.get(f).contains("t")){
+                        on = ifZero(f);
+                        f--;
+                        System.out.println("Respuesta: "+calc.evaluatePrefix(a.get(f)));
                         
                         break;
                     }
-                    else{
-                        System.out.println("No se cumple la condución");
-                        break;
-                    }
-                } else {
-                    ifZero(i);
-                    i--;
-                    ArrayList<String> condic = new ArrayList<>();
-                    condic = a.get(i);
-                    ifZero(i);
-                    i--;
-                    if (parse(condic) == 1){
+                    else {
+                        ArrayList<String> condic = new ArrayList<>();
+                        condic = a.get(f);
                         
-                        System.out.println(calc.evaluatePrefix(a.get(i)));
-                        break;
-                    }
-                    else{
-                        break;
+                        if (parse(condic) == 1){
+                            on = ifZero(f);
+                            f--;
+                            System.out.println("Respuesta: "+calc.evaluatePrefix(a.get(f)));
+                            
+                            break;
+                        }
+                        if (parse(condic) == 3){
+                            System.out.println("Condicion invalida");
+                            break;
+                        }
+                        else{
+                            if (f == i){
+                                on = ifZero(f);
+                                f--;
+                                continue;
+                            } else {
+                                System.out.println("No se cumple la condición");
+                                on = ifZero(f);
+                                f--;
+                                continue;
+                            }
+                        }
                     }
                 }
+                break;
+
+
+
+                
             }
             if (s.contains("EQUAL")){ ///EQUAL
                 int k = fn.equal(s);
@@ -184,7 +207,7 @@ public class parser {
                 break;
             }
             else {
-                System.out.println("Respuesta: "+calc.evaluatePrefix(s));
+                System.out.println("Respuesta: "+calc.calculate(a));
                 break;
             }
         }

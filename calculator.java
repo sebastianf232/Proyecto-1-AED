@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 
 import java.io.*;
+import java.text.BreakIterator;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -37,7 +38,7 @@ public class calculator {
      * @param a
      * @return continue, 0
      */
-    public double evaluatePrefix(ArrayList<String> a)
+    public Double evaluatePrefix(ArrayList<String> a)
     {
         Stack<Double> Stack = new Stack<Double>();
         try {
@@ -73,7 +74,7 @@ public class calculator {
                     }
                     else {
                         System.out.println("Caracter invalido en expresion");
-                        return 0;
+                        return 0.0;
                         
                     }
                 }
@@ -83,11 +84,83 @@ public class calculator {
 
         } catch (Exception e){
             System.out.println("Error de evaluacion");
-            return 0;
+            return 0.0;
         }
-    }        
- 
+    }
+    public Double calculate(ArrayList<ArrayList<String>> a){
+        int i = 0;
+        Stack<String> temp = new Stack<>();
+        ArrayList<String> temp1 = new ArrayList<>();
+        boolean on = true;
+        String res = "0.0";
+        Double res1 = 0.0;
+        if (a.size() >= 1){
+            while (on){
+                ArrayList<String> s = a.get(i);
+                if ((s.contains("+") || s.contains("-") || s.contains("*") ||s.contains("/")) && (s.size() > 1) ){
+                    res = evaluatePrefix(s).toString();
+                    System.out.println("res : "+res);
+                    if (ifZero(i, a)){
+                        temp.add(res);
+                        
+                        i++;
+                        continue;
+                    } else {
+                        res1 = Double.parseDouble(res);
+                        break;
+                    }
+                    
+                }
+                if ((s.contains("+") || s.contains("-") || s.contains("*") ||s.contains("/")) && (s.size() == 1)){
+                    temp1.add(s.get(0));
+                    temp1.add(temp.remove());
+                    temp1.add(temp.remove());
+                    res = evaluatePrefix(temp1).toString();
+                    System.out.println("res : "+res);
+                    if (ifZero(i, a)){
+                        temp.add(res);
 
+                        i++;
+                        continue;
+                    } else {
+                        res1 = Double.parseDouble(res);
+                        break;
+                        
+                    }
+                } if (s.size() == 1) {
+                    temp.add(s.get(0));
+                    if (ifZero(i, a)){
+                        i++;
+                        continue;
+                    } else {
+                        System.out.println("Invalida");
+                        res1 = Double.parseDouble(res);
+                        break;
+                        
+                    }
+                } else {
+                    System.out.println("Expresion no valida");
+                    res1 = Double.parseDouble(res);
+                    break;
+                }
+            }
+            return res1;
+        }
+        else {
+            System.out.println("Operacion no valida");
+            return 0.0;
+        }           
+    
+    }      
+    public boolean ifZero(int i, ArrayList a){
+        if (i == a.size()-1){
+            return false;
+
+        }
+        else {
+            return true;
+        }
+    }
 }
  
 

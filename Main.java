@@ -33,7 +33,7 @@ public class Main{
             }
             lista = tokenFinder.listaLisp(oper);
             
-            
+        
             
             System.out.println("\n");
             ps.parseFull(lista, defuns, funcparams);

@@ -97,7 +97,7 @@ public class calculator {
         if (a.size() >= 1){
             while (on){
                 ArrayList<String> s = a.get(i);
-                if ((s.contains("+") || s.contains("-") || s.contains("*") ||s.contains("/")) && (s.size() > 1) ){
+                if ((s.contains("+") || s.contains("-") || s.contains("*") ||s.contains("/")) && (s.size() > 2) ){
                     res = evaluatePrefix(s).toString();
                     System.out.println("res : "+res);
                     if (ifZero(i, a)){
@@ -116,6 +116,7 @@ public class calculator {
                     temp1.add(temp.remove());
                     temp1.add(temp.remove());
                     res = evaluatePrefix(temp1).toString();
+                    temp1.clear();
                     System.out.println("res : "+res);
                     if (ifZero(i, a)){
                         temp.add(res);
@@ -138,7 +139,26 @@ public class calculator {
                         break;
                         
                     }
-                } else {
+                } if (s.size() == 2){
+                    temp1.add(s.get(0));
+                    temp1.add(s.get(1));
+                    temp1.add(temp.remove());
+                    res = evaluatePrefix(temp1).toString();
+                    temp1.clear();
+                    System.out.println("res : "+res);
+                    if (ifZero(i, a)){
+                        temp.add(res);
+
+                        i++;
+                        continue;
+                    } else {
+                        res1 = Double.parseDouble(res);
+                        break;
+                        
+                    }
+
+                }
+                else {
                     System.out.println("Expresion no valida");
                     res1 = Double.parseDouble(res);
                     break;

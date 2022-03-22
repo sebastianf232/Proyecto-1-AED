@@ -16,15 +16,15 @@ public class Main{
     static ArrayList<ArrayList<String>> lista = new ArrayList<>();
     static ArrayList<String> listaA = new ArrayList<>();
     static ArrayList<String> listatemp = new ArrayList<>();
-    
+    static Map<String, ArrayList<ArrayList<String>>> defuns = new HashMap<>();
+    static Map<String, ArrayList<String>> funcparams = new HashMap<>();
+    static Map<String, ArrayList<String>> vars = new HashMap<>();
     public static void main(String args[]) {
         Scanner scan = new Scanner(System.in);
         funciones fn = new funciones();
         parser ps = new parser();
         boolean on = true;
-        Map<String, ArrayList<ArrayList<String>>> defuns = new HashMap<>();
-        Map<String, String> funcparams = new HashMap<>();
-        Map<String, String> vars = new HashMap<>();
+        
         while (on){
             
             System.out.println("Ingrese la expresion LISP  o ingrese END para salir");
@@ -32,9 +32,11 @@ public class Main{
             if (oper.equalsIgnoreCase("END")){
                 break;
             }
+            if (tokenFinder.listaLisp(oper) == null){
+                continue;
+            }
             lista = tokenFinder.listaLisp(oper);
             
-        
             
             System.out.println("\n");
             ps.parseFull(lista, defuns, funcparams, vars);

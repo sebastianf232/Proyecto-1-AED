@@ -17,34 +17,34 @@ public class StackTest {
     private final Stack<Double> s = new Stack<>();
     //double sc;
     @Test
-    void add() {
+    public void add() {
         s.add(5.0);
         s.add(4.0);
     }
 
     @Test
-    void remove() {
+    public void remove() {
         s.add(5.0);
         s.add(4.0);
         assertEquals(4 , s.remove(), 0.1);
     }
 
     @Test
-    void peek(){
+    public void peek(){
         s.add(5.0);
         s.add(4.0);
         assertEquals(4,s.peek(),0.1);
     }
 
     @Test
-    void size(){
+    public void size(){
         s.add(5.0);
         s.add(4.0);
         assertEquals(2,s.size(),0.1);
     }
 
     @Test
-    void empty(){
-
+    public void empty(){
+        assertEquals(s.empty(), true);
     }
 }

@@ -37,6 +37,10 @@ public class tokenFinder {
      */
     public ArrayList<String> separate(String str){  ///Metodo que separa cada caracter en el ArrayList
         ArrayList<String> chars = new ArrayList<>();
+        if (!str.contains("(")){
+            System.out.println("\n Expresión no valida \n");
+            return null;
+        }
         str = str.replace("(", " (");
 
         String[] temp = str.split("\\s+");
@@ -66,6 +70,9 @@ public class tokenFinder {
     public ArrayList<ArrayList<String>> listaLisp(String s){ ///Metodo que permite aniade los  caracteres en el ArrayList
         
         ArrayList<String> listaIn = new ArrayList<>();
+        if (separate(s) == null){
+            return null;
+        }
         listaIn = separate(s);
 
         

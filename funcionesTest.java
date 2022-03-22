@@ -29,7 +29,7 @@ public class funcionesTest {
         a.add("Prueba");
         a.add("15");
         a.add("11");
-        assertEquals(1,f.greater(a),0.1);
+        assertEquals(0,f.lesser(a),0.1);
     }
 
     @Test
@@ -37,6 +37,6 @@ public class funcionesTest {
         a.add("Prueba");
         a.add("15");
         a.add("11");
-        assertEquals(1,f.greater(a),0.1);
+        assertEquals(0,f.equal(a),0.1);
     }
 }

@@ -24,6 +24,7 @@ public class Main{
         boolean on = true;
         Map<String, ArrayList<ArrayList<String>>> defuns = new HashMap<>();
         Map<String, String> funcparams = new HashMap<>();
+        Map<String, String> vars = new HashMap<>();
         while (on){
             
             System.out.println("Ingrese la expresion LISP  o ingrese END para salir");
@@ -36,7 +37,7 @@ public class Main{
         
             
             System.out.println("\n");
-            ps.parseFull(lista, defuns, funcparams);
+            ps.parseFull(lista, defuns, funcparams, vars);
             System.out.println("\n");
         }
     }

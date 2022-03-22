@@ -26,14 +26,28 @@ public class parser {
      * @param par
      * Permite parsear segun lo que se indica.
      */
-    public void parseFull(ArrayList<ArrayList<String>> a, Map<String, ArrayList<ArrayList<String>>> p, Map<String, String> par){
+    public void parseFull(ArrayList<ArrayList<String>> a, Map<String, ArrayList<ArrayList<String>>> p, Map<String, String> par, Map<String, String> var){
         tokenFinder tf = new tokenFinder();
         funciones fn = new funciones();
         int i = a.size()-1;
         boolean on = true;
+        boolean replaced = false;
         while(on){
             ArrayList<String> s = new ArrayList<>();
             s = a.get(i);
+            for (int u = 0; u<s.size(); u++){
+                if (var.containsKey(s.get(u))){
+                    replaceparam(var.get(s.get(u)), s.get(u), a);
+                    replaced = true;
+                }
+                else {
+                    continue;
+                }
+            }
+            if (replaced == true){
+                parseFull(a, p, par, var);
+                break;
+            }
             if (p.containsKey(s.get(0))){ ///Evalua si se ingreso alguna funcion ya definida
                 ArrayList<ArrayList<String>> evalfun = p.get(s.get(0));
                 String evalparam = s.get(1);
@@ -50,7 +64,7 @@ public class parser {
                 
                 
                 par.replace(s.get(0), param, evalparam);
-                parseFull(evalinst, p, par);
+                parseFull(evalinst, p, par, var);
                 break;
             }
             if (s.contains("DEFUN") || s.contains("defun")){ //DEFUN
@@ -88,8 +102,9 @@ public class parser {
 
 
             }
+            
             if (s.contains("ATOM") || s.contains("atom")){ //ATOM
-                if (s.size()==2){
+                if (s.size()==2 && a.size() == 1){
                     System.out.println("TRUE"); // devuelve TRUE al no ser una lista
                     break;
                 }
@@ -206,6 +221,26 @@ public class parser {
                 }
                 break;
             }
+            if (s.contains("setq") || s.contains("SETQ")){
+                String varName;
+                String varValue;
+                if (s.size() > 2){
+                    for (int q = 1; q < s.size(); q++){
+                        varName = s.get(q);
+                        q++;
+                        varValue = s.get(q);
+                        var.put(varName, varValue);
+                        System.out.println("Variable -"+varName+"- valor: "+varValue);
+                    }
+                    on = ifZero(i);
+                    i--;
+                    continue;
+                } else {
+                    System.out.println("Error de asignacion");
+                }
+                
+            }
+
             else {
                 System.out.println("Respuesta: "+calc.calculate(a));
                 break;
